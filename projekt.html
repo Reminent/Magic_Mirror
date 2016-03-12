@@ -1,34 +1,113 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-#time{
-	font-size: 30px;
-}
-
-#weather{
-	font-size: 30px;
-}
-
-#date{
-	font-size: 30px;
-}
-
-body{
-	background-color: black;
-	color: white;
-}
-
-</style>
 <meta charset = utf-8>
 <title>Projekt</title>
 <script src="projekt.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- inport of font -->
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+<style>
+	body{
+		background-color: black;
+		color: white;
+		font-family: serif;
+	}
+
+	#time{
+		font-size: 50px;
+	}
+
+	#weather{
+		font-size: 30px;
+	}
+
+	#MainDate{
+		font-size: 40px;
+	}
+
+	#calendar{
+		font-size:30px;
+	}
+
+	#movies{
+		font-size: 30px;
+	}
+
+	#weather_image{
+		width: 100px;
+		height: 100px;
+	}
+
+	#quote{
+		font-size: 30px;
+		font-family: 'Lobster', cursive;
+	}
+
+	#quoteAuthor{
+		font-size: 25px;
+	}
+
+	#quoteInfo{
+		font-size: 20px;
+	}
+
+	.well{
+	    background: black;
+	    border-color: black;
+	}
+
+	.jumbotron{
+		background: black;
+	}
+</style>
+
 </head>
 <body onload="start_mirror()">
-<div id="time"></div>
-<div id="date"></div>
-<div id="weather"></div>
-<div id="movies"></div>
+<div id="authorize-div" style="display: none">
+  <span>Authorize access to Google Calendar API</span>
+  <!--Button for the user to click to initiate auth sequence -->
+  <button id="authorize-button" onclick="handleAuthClick(event)">
+    Authorize
+  </button>
+</div>
+<div class="jumbotron">
+	<div class="container-fluid text-center">
+		<div id="MainDate" class="col-sm-6 sidenav">
+			<div id="week"></div>
+			<div id="date"></div>
+		</div>
+		<div id="time" class="col-sm-6 sidenav"></div>
+	</div>
+</div>
+<div class="container-fluid text-center">
+	<div class="row content">
+		<div class="col-sm-3 sidenav">
+			<div id="weather" class="well">
+				<div id="weather_one"></div>
+				<div id="weather_two"></div>
+				<div id="weather_three"></div>
+				<div id="weather_four"></div>
+			</div>
+		</div>
+		<div id="movies" class="col-sm-6"></div>
+		<div class="col-sm-3 sidenav">
+			<div id="calendar" class="well"></div>
+		</div>	
+	</div>
+	<footer class="container-fluid">
+  		<div>
+  			<div id="quote"></div>
+  			<div id="quoteAuthor"></div>
+  			<div id="quoteInfo"></div>
+  		</div>
+	</footer>
+</div>
 </body>
 </html>
