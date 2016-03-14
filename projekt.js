@@ -21,8 +21,8 @@ function start_mirror() {
   dailyPokemon();
   dailyQuote();
   get_weatheryr();
-  //get_upcoming_movie();
   set_todays_date();
+	//get_upcoming_movie();
 	startTime();
   listUpcomingEventsPrimary();
 }
@@ -125,7 +125,7 @@ function get_weatherSMHI() {
         weather_date = weather_date.split("T");
         var period = [0,0,0,0];
         var counts = [0,0,0,0];
-        
+
         for(var i = 0; i < json.timeseries.length; i++) {
           if(weather_date[0] == todays_date()) {
             var weather_time = weather_date[1].split(":")
@@ -173,12 +173,11 @@ function get_weatherSMHI() {
         if(!isNaN(period[3]/counts[3]) && current_hour() <= 24) {
           document.getElementById("weather").innerHTML += weather_content_four;
         }
-
-
       }
     });
 }
 
+<<<<<<< HEAD
 function get_weatheryr() {
   $.ajax({
     url: "get_weather.php",
