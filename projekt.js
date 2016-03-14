@@ -8,7 +8,8 @@ function start_mirror() {
     set_todays_date();
   }, 60*1000);
 	//Functions run every hour
-  setInterval(function(){  
+  setInterval(function(){
+    dailyPokemon();  
     get_weatheryr();
     dailyQuote();
     listUpcomingEventsPrimary();
@@ -17,7 +18,7 @@ function start_mirror() {
   setInterval(function(){
     //get_upcoming_movie();
   }, 86400*1000);
-
+  dailyPokemon();
   dailyQuote();
   get_weatheryr();
   //get_upcoming_movie();
@@ -81,7 +82,7 @@ function startTime() {
     m = checkTime(m);
     s = checkTime(s);
     document.getElementById('time').innerHTML =
-    h + ":" + m + ":" + s;
+    h + ":" + m;
     var t = setTimeout(startTime, 500);
 }
 
@@ -264,10 +265,10 @@ function get_weatheryr() {
         }
       }
 
-      var weather_content_one = "00:00 - 06:00: <br>" + average_temps[0] + "C " + "<img id='weather_image' src='icons/used_icons/" + cloud_index[0] + ".png' alt=" + "Weather icon" + ">" + "<br><br>";
-      var weather_content_two = "06:00 - 12:00: <br>" + average_temps[1] + "C " + "<img id='weather_image' src='icons/used_icons/" + cloud_index[1] + ".png' alt=" + "Weather icon" + ">" + "<br><br>";
-      var weather_content_three = "12:00 - 18:00: <br>" + average_temps[2] + "C " + "<img id='weather_image' src='icons/used_icons/" + cloud_index[2] + ".png' alt=" + "Weather icon" + ">" + "<br><br>";
-      var weather_content_four = "18:00 - 24:00: <br>" + average_temps[3] + "C " + "<img id='weather_image' src='icons/used_icons/" + cloud_index[3] + ".png' alt=" + "Weather icon" + ">" + "<br><br>";
+      var weather_content_one = "00:00 - 06:00: " + average_temps[0] + "C " + "<img id='weather_image' src='icons/used_icons/" + cloud_index[0] + ".png' alt=" + "Weather icon" + ">" + "<br><br>";
+      var weather_content_two = "06:00 - 12:00: " + average_temps[1] + "C " + "<img id='weather_image' src='icons/used_icons/" + cloud_index[1] + ".png' alt=" + "Weather icon" + ">" + "<br><br>";
+      var weather_content_three = "12:00 - 18:00: " + average_temps[2] + "C " + "<img id='weather_image' src='icons/used_icons/" + cloud_index[2] + ".png' alt=" + "Weather icon" + ">" + "<br><br>";
+      var weather_content_four = "18:00 - 24:00: " + average_temps[3] + "C " + "<img id='weather_image' src='icons/used_icons/" + cloud_index[3] + ".png' alt=" + "Weather icon" + ">" + "<br><br>";
       
       if(!isNaN(period[0]/counts[0]) && current_hour() <= 6) {
         document.getElementById("weather_one").innerHTML = weather_content_one;
@@ -381,6 +382,54 @@ function dailyQuote() {
         document.getElementById("quote").innerHTML = quote;
         document.getElementById("quoteAuthor").innerHTML = authorName;
         document.getElementById("quoteInfo").innerHTML = authorInfo;
+      }
+    });
+}
+
+function dailyPokemon() {
+  var x = Math.floor((Math.random() * 721) + 1);
+
+  $.ajax({
+      url: "http://pokeapi.co/api/v1/pokemon/" + x + "/",
+      type: "GET",
+      dataType: "json",
+      success: function(json){
+        var name = json.name;
+        var types = json.types;
+        var descriptionURI = json.descriptions[0].resource_uri;
+        var sprite = json.sprites[0].resource_uri;
+        descriptionURI = "http://pokeapi.co" + descriptionURI;
+        sprite = "http://pokeapi.co" + sprite;
+        var typesList = "";
+
+        for(var i = 0; i < Object.keys(types).length; i++){
+          typesList += types[i].name + " ";
+        }
+        document.getElementById("pokemonName").innerHTML = name + " Type: " + typesList;
+        //document.getElementById("pokemonType").innerHTML = typesList;
+
+      $.ajax({
+        url: descriptionURI,
+        type: "GET",
+        dataType: "json",
+        success: function(jsonDesc){
+          var desc = jsonDesc.description;
+          document.getElementById("pokemonDescription").innerHTML = desc;
+        }
+      });
+
+      $.ajax({
+        url: sprite,
+        type: "GET",
+        dataType: "json",
+        success: function(jsonSprite){
+          var imageURL = jsonSprite.image;
+          imageURL = "http://pokeapi.co" + imageURL;
+
+          document.getElementById("pokemonImage").innerHTML = "<img src='" + imageURL + "' id='pokemonSpriteImage'></img>"
+        }
+      });
+
       }
     });
 }

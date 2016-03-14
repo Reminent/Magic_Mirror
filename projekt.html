@@ -58,6 +58,19 @@
 		font-size: 20px;
 	}
 
+	#pokemon{
+		font-size: 20px;
+	}
+
+	#pokemonSpriteImage{
+		width: 200;
+		height: 200px;
+	}
+
+	#mainArea{
+		height: 80%;
+	}
+
 	.well{
 	    background: black;
 	    border-color: black;
@@ -77,32 +90,44 @@
     Authorize
   </button>
 </div>
-<div class="jumbotron">
-	<div class="container-fluid text-center">
-		<div id="MainDate" class="col-sm-6 sidenav">
-			<div id="week"></div>
-			<div id="date"></div>
-		</div>
-		<div id="time" class="col-sm-6 sidenav"></div>
-	</div>
-</div>
-<div class="container-fluid text-center">
-	<div class="row content">
-		<div class="col-sm-3 sidenav">
-			<div id="weather" class="well">
-				<div id="weather_one"></div>
-				<div id="weather_two"></div>
-				<div id="weather_three"></div>
-				<div id="weather_four"></div>
+<div id="mainArea">
+	<div class="jumbotron">
+		<div class="container-fluid text-center">
+			<div id="MainDate" class="col-sm-4 sidenav">
+				<div id="week"></div>
+				<div id="date"></div>
+			</div>
+			<div id="time" class="col-sm-4 sidenav"></div>
+			<div id="pokemon" class="col-sm-3 sidenav">
+				<div id="pokemonName"></div>
+				<div id="pokemonType"></div>
+				<div id="pokemonDescription"></div>
+			</div>
+			<div id="pokemonSprite" class="col-sm-1 sidenav">
+				<div id="pokemonImage"><img src=""></div>
 			</div>
 		</div>
-		<div id="movies" class="col-sm-6"></div>
-		<div class="col-sm-3 sidenav">
-			<div id="calendar" class="well"></div>
-		</div>	
 	</div>
-	<footer class="container-fluid">
-  		<div>
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div class="col-sm-4 sidenav">
+				<div id="weather">
+					<div id="weather_one"></div>
+					<div id="weather_two"></div>
+					<div id="weather_three"></div>
+					<div id="weather_four"></div>
+				</div>
+			</div>
+			<div id="movies" class="col-sm-4"></div>
+			<div class="col-sm-4 sidenav">
+				<div id="calendar"></div>
+			</div>	
+		</div>
+	</div>
+</div>
+<div>
+	<footer class="container-fluid text-center">
+  		<div class="navbar-fixed-bottom">
   			<div id="quote"></div>
   			<div id="quoteAuthor"></div>
   			<div id="quoteInfo"></div>
