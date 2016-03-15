@@ -177,7 +177,6 @@ function get_weatherSMHI() {
     });
 }
 
-<<<<<<< HEAD
 function get_weatheryr() {
   $.ajax({
     url: "get_weather.php",
