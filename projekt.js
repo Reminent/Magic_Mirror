@@ -18,6 +18,7 @@ function start_mirror() {
   setInterval(function(){
     //get_upcoming_movie();
   }, 86400*1000);
+  get_SF();
   dailyPokemon();
   dailyQuote();
   get_weatheryr();
@@ -430,4 +431,13 @@ function dailyPokemon() {
 
       }
     });
+}
+
+function get_SF() {
+  $.ajax({
+        url: "get_movies.php",
+        success: function(xml){
+          console.log(xml);
+        }
+      });
 }
